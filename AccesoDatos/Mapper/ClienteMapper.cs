@@ -1,4 +1,5 @@
 ﻿using AccesoDatos.DAO;
+using Entidades;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -80,7 +81,7 @@ namespace AccesoDatos.Mapper
 
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
-            var customer = new Customer
+            var cliente = new Cliente
             {
                 Id = GetStringValue(row, DB_COL_ID),
                 Name = GetStringValue(row, DB_COL_NAME),
@@ -88,32 +89,9 @@ namespace AccesoDatos.Mapper
                 Age = GetIntValue(row, DB_COL_AGE)
             };
 
-            return customer;
+            return cliente;
         }
 
-        SqlOperation ISqlStatements.GetCreateStatement(BaseEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        SqlOperation ISqlStatements.GetRetriveStatement(BaseEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        SqlOperation ISqlStatements.GetRetriveAllStatement()
-        {
-            throw new NotImplementedException();
-        }
-
-        SqlOperation ISqlStatements.GetUpdateStatement(BaseEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        SqlOperation ISqlStatements.GetDeleteStatement(BaseEntity entity)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
