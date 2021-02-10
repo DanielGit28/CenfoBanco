@@ -14,6 +14,12 @@ namespace AccesoDatos.Mapper
         private const string DB_COL_NOMBRE = "Nombre";
         private const string DB_COL_CUOTA = "Cuota";
         private const string DB_COL_FECHAINICIO = "FechaInicio";
+
+        internal object GetCreateStatement(Credito credito)
+        {
+            throw new NotImplementedException();
+        }
+
         private const string DB_COL_ESTADO = "Estado";
         private const string DB_COL_SALDOOPERACION = "SaldoOperacion";
         private const string DB_COL_CLIENTE = "Cliente";
@@ -45,6 +51,16 @@ namespace AccesoDatos.Mapper
             operation.AddIntParam(DB_COL_ID, c.Id_Credito);
 
             return operation;
+        }
+
+        internal SqlOperation GetUpdateStatement(Credito credito)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal SqlOperation GetDeleteStatement(Credito credito)
+        {
+            throw new NotImplementedException();
         }
 
         public SqlOperation GetRetriveAllStatement()

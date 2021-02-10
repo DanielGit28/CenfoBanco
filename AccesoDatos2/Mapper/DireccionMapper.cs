@@ -26,6 +26,10 @@ namespace AccesoDatos.Mapper
             return operation;
         }
 
+        internal object GetCreateStatement(Direccion direccion)
+        {
+            throw new NotImplementedException();
+        }
 
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
@@ -54,6 +58,16 @@ namespace AccesoDatos.Mapper
             operation.AddVarcharParam(DB_COL_DISTRITO, c.Distrito);
 
             return operation;
+        }
+
+        internal SqlOperation GetDeleteStatement(Direccion direccion)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal SqlOperation GetUpdateStatement(Direccion direccion)
+        {
+            throw new NotImplementedException();
         }
 
         public SqlOperation GetDeleteStatement(BaseEntity entity)

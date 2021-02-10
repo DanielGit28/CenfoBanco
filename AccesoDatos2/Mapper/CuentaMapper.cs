@@ -28,6 +28,10 @@ namespace AccesoDatos.Mapper
             return operation;
         }
 
+        internal object GetCreateStatement(Cuenta cuenta)
+        {
+            throw new NotImplementedException();
+        }
 
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
@@ -57,6 +61,16 @@ namespace AccesoDatos.Mapper
             operation.AddIntParam(DB_COL_CLIENTE, c.Cliente);
 
             return operation;
+        }
+
+        internal SqlOperation GetDeleteStatement(Cliente cuenta)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal SqlOperation GetUpdateStatement(Cuenta cuenta)
+        {
+            throw new NotImplementedException();
         }
 
         public SqlOperation GetDeleteStatement(BaseEntity entity)

@@ -14,6 +14,13 @@ namespace AccesoDatos.Mapper
         private const string DB_COL_APELLIDO = "Apellido";
         private const string DB_COL_FECHANAC = "FechaNac";
         private const string DB_COL_EDAD = "Edad";
+
+        //esto arregla que el objeto var cliente no salga como error
+        internal object GetCreateStatement(Cliente cliente)
+        {
+            throw new NotImplementedException();
+        }
+
         private const string DB_COL_ESTADOCIVIL = "EstadoCivil";
         private const string DB_COL_GENERO = "Genero";
         private const string DB_COL_DIRECCION = "Direccion";
@@ -45,6 +52,16 @@ namespace AccesoDatos.Mapper
             operation.AddIntParam(DB_COL_ID, c.Id_Cliente);
 
             return operation;
+        }
+
+        internal SqlOperation GetUpdateStatement(Cliente cliente)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal SqlOperation GetDeleteStatement(Cliente cliente)
+        {
+            throw new NotImplementedException();
         }
 
         public SqlOperation GetRetriveAllStatement()

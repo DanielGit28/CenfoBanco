@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B1CAA656-1CA4-4271-A6AE-048EA7C54A0C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <StartupObject>Cliente1.Module1</StartupObject>
+    <StartupObject>Cliente1.Program</StartupObject>
     <RootNamespace>Cliente1</RootNamespace>
     <AssemblyName>Cliente1</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -72,7 +72,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Module1.vb" />
+    <Compile Include="ClienteManagement.vb" />
+    <Compile Include="CreditoManagement.vb" />
+    <Compile Include="CuentaManagement.vb" />
+    <Compile Include="DireccionManagement.vb" />
+    <Compile Include="Program.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -109,6 +113,16 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AccesoDatos2\AccesoDatos.csproj">
+      <Project>{a8a7e783-3afa-4ce0-beb6-10eeccb71705}</Project>
+      <Name>AccesoDatos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entidades2\Entidades.csproj">
+      <Project>{8f67565d-5843-4d7c-90ef-a1dccca134be}</Project>
+      <Name>Entidades</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

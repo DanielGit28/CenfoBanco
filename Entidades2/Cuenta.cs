@@ -45,5 +45,10 @@ namespace Entidades
         {
             throw new NotImplementedException();
         }
+
+        public static implicit operator Cuenta(Cuenta v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
