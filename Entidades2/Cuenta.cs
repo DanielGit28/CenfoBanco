@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Entidades
 {
-    public class Cuenta
+    public class Cuenta : BaseEntity
     {
         public int Id_Cuenta { get; set; }
         public string Nombre { get; set; }
@@ -41,14 +41,5 @@ namespace Entidades
 
         }
 
-        public static explicit operator Cuenta(BaseEntity v)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static implicit operator Cuenta(Cuenta v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

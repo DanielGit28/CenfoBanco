@@ -16,7 +16,7 @@ Public Class ClienteManagement
     End Function
 
     Public Function RetrieveById(cliente As Entidades.Cliente) As Entidades.Cliente
-        Return crudCliente.Retrieve(Of Entidades.Cliente)
+        Return crudCliente.Retrieve(Of Entidades.Cliente)(cliente)
     End Function
 
     Friend Function Update(cliente As Entidades.Cliente)

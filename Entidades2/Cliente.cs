@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Entidades
 {
-    public class Cliente
+    public class Cliente : BaseEntity
     {
         public int Id_Cliente { get; set; }
         public string Cedula { get; set; }
@@ -52,9 +52,5 @@ namespace Entidades
 
         }
 
-        public static explicit operator Cliente(BaseEntity v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

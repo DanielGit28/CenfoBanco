@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Entidades
 {
-    public class Credito
+    public class Credito : BaseEntity
     {
         public int Id_Credito { get; set; }
         public float Monto { get; set; }
@@ -49,9 +49,6 @@ namespace Entidades
 
         }
 
-        public static explicit operator Credito(BaseEntity v)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

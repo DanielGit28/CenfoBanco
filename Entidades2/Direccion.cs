@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Entidades
 {
-    public class Direccion
+    public class Direccion : BaseEntity
     {
         public int Id_Direccion { get; set; }
         public string Provincia { get; set; }
@@ -37,9 +37,5 @@ namespace Entidades
 
         }
 
-        public static explicit operator Direccion(BaseEntity v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

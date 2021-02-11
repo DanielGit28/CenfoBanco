@@ -25,7 +25,6 @@ namespace AccesoDatos.Crud
         }
 
 
-
         public override T Retrieve<T>(BaseEntity entity)
         {
             var sqlOperation = mapper.GetRetriveStatement(entity);
