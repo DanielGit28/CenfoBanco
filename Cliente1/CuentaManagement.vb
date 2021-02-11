@@ -1,7 +1,6 @@
-﻿Imports AccesoDatos
-Imports Entidades
+﻿
 Public Class CuentaManagement
-    Public crudCuenta As AccesoDatos.Crud.CuentaCrudFactory
+    Private crudCuenta As AccesoDatos.Crud.CuentaCrudFactory
     Public Sub CreditoManagement()
         crudCuenta = New AccesoDatos.Crud.CuentaCrudFactory()
     End Sub
@@ -18,7 +17,7 @@ Public Class CuentaManagement
         Return crudCuenta.Retrieve(Of Entidades.Cuenta)
     End Function
 
-    FriendFunction Update(cuenta As Entidades.Cuenta)
+    Friend Function Update(cuenta As Entidades.Cuenta)
         crudCuenta.Update(cuenta)
     End Function
 

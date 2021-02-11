@@ -1,13 +1,16 @@
-﻿Imports AccesoDatos
-Imports Entidades
+﻿
 Public Class DireccionManagement
-    Public crudDireccion As Crud.DireccionCrudFactory
+    Private crudDireccion As AccesoDatos.Crud.DireccionCrudFactory
     Public Sub CreditoManagement()
-        crudDireccion = New Crud.DireccionCrudFactory()
+        crudDireccion = New AccesoDatos.Crud.DireccionCrudFactory()
     End Sub
 
     Public Function Create(direccion As Entidades.Direccion)
         crudDireccion.Create(direccion)
+    End Function
+
+    Public Function RetrieveIdentity() As Integer
+        Return crudDireccion.getIdentity()
     End Function
 
     Public Function RetrieveAll() As List(Of Entidades.Direccion)

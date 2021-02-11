@@ -22,9 +22,15 @@ namespace AccesoDatos.Crud
             var direccion = (Direccion)entity;
             var sqlOperation = mapper.GetCreateStatement(direccion);
             dao.ExecuteProcedure((SqlOperation)sqlOperation);
+            
         }
 
+        public void getIdentity()
+        {
+            var sqlOperation = mapper.GetRetriveIdentity();
+            dao.ExecuteProcedure((SqlOperation)sqlOperation);
 
+        }
 
         public override T Retrieve<T>(BaseEntity entity)
         {

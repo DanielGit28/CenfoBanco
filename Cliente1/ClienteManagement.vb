@@ -1,7 +1,8 @@
-﻿Imports AccesoDatos
-Imports Entidades
+﻿
 Public Class ClienteManagement
-    Public crudCliente As AccesoDatos.Crud.ClienteCrudFactory
+
+    Private crudCliente As AccesoDatos.Crud.ClienteCrudFactory
+
     Public Sub ClienteManagement()
         crudCliente = New AccesoDatos.Crud.ClienteCrudFactory()
     End Sub

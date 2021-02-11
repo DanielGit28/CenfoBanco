@@ -31,6 +31,14 @@ namespace AccesoDatos.Mapper
             throw new NotImplementedException();
         }
 
+        //DEVUELVE EL PROCEDURE DE IDENTITY ID
+        public SqlOperation GetRetriveIdentity()
+        {
+            var operation = new SqlOperation { ProcedureName = "IDENTITY_PR" };
+
+            return operation;
+        }
+
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "RET_DIRECCION_PR" };

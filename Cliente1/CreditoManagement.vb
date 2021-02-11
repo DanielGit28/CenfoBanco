@@ -1,7 +1,6 @@
-﻿Imports AccesoDatos
-Imports Entidades
+﻿
 Public Class CreditoManagement
-    Public crudCredito As AccesoDatos.Crud.CreditoCrudFactory
+    Private crudCredito As AccesoDatos.Crud.CreditoCrudFactory
     Public Sub CreditoManagement()
         crudCredito = New AccesoDatos.Crud.CreditoCrudFactory()
     End Sub

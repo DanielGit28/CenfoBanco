@@ -28,6 +28,24 @@ namespace AccesoDatos.DAO
             return instance;
         }
 
+        public void ExecuteProcedureIdentity(SqlOperation sqlOperation)
+        {
+            using (var conn = new SqlConnection(CONNECTION_STRING))
+            using (var command = new SqlCommand(sqlOperation.ProcedureName, conn)
+            {
+                CommandType = CommandType.StoredProcedure
+            })
+            {
+                foreach (var param in sqlOperation.Parameters)
+                {
+                    command.Parameters.Add(param);
+                }
+
+                conn.Open();
+                command.ExecuteNonQuery();
+
+            }
+        }
 
         public void ExecuteProcedure(SqlOperation sqlOperation)
         {
