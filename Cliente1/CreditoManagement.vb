@@ -14,7 +14,7 @@ Public Class CreditoManagement
     End Function
 
     Public Function RetrieveById(credito As Entidades.Credito) As Entidades.Credito
-        Return crudCredito.Retrieve(Of Entidades.Credito)
+        Return crudCredito.Retrieve(Of Entidades.Credito)(credito)
     End Function
 
     Friend Function Update(credito As Entidades.Credito)

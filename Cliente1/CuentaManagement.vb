@@ -14,7 +14,7 @@ Public Class CuentaManagement
     End Function
 
     Public Function RetrieveById(cuenta As Entidades.Cuenta) As Entidades.Cuenta
-        Return crudCuenta.Retrieve(Of Entidades.Cuenta)
+        Return crudCuenta.Retrieve(Of Entidades.Cuenta)(cuenta)
     End Function
 
     Friend Function Update(cuenta As Entidades.Cuenta)

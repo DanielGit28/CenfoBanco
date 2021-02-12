@@ -25,11 +25,11 @@ namespace AccesoDatos.Crud
             
         }
 
-        public void getIdentity()
+        public int getIdentity()
         {
             var sqlOperation = mapper.GetRetriveIdentity();
-            dao.ExecuteProcedure((SqlOperation)sqlOperation);
-
+            
+            return Convert.ToInt32(dao.ExecuteQueryProcedure(sqlOperation));
         }
 
         public override T Retrieve<T>(BaseEntity entity)

@@ -18,7 +18,7 @@ Public Class DireccionManagement
     End Function
 
     Public Function RetrieveById(direccion As Entidades.Direccion) As Entidades.Direccion
-        Return crudDireccion.Retrieve(Of Entidades.Direccion)
+        Return crudDireccion.Retrieve(Of Entidades.Direccion)(direccion)
     End Function
 
     Friend Function Update(direccion As Entidades.Direccion)
