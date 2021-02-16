@@ -15,22 +15,17 @@ namespace AccesoDatos.Mapper
         private const string DB_COL_FECHANAC = "FechaNac";
         private const string DB_COL_EDAD = "Edad";
 
-        //esto arregla que el objeto var cliente no salga como error
-        internal object GetCreateStatement(Cliente cliente)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         private const string DB_COL_ESTADOCIVIL = "EstadoCivil";
         private const string DB_COL_GENERO = "Genero";
-        private const string DB_COL_DIRECCION = "Direccion";
 
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "CRE_CLIENTE_PR" };
 
             var c = (Cliente)entity;
-            operation.AddIntParam(DB_COL_ID, c.Id_Cliente);
+            //operation.AddIntParam(DB_COL_ID, c.Id_Cliente);
             operation.AddVarcharParam(DB_COL_CEDULA, c.Cedula);
             operation.AddVarcharParam(DB_COL_NOMBRE, c.Nombre);
             operation.AddVarcharParam(DB_COL_APELLIDO, c.Apellido);
@@ -38,7 +33,6 @@ namespace AccesoDatos.Mapper
             operation.AddIntParam(DB_COL_EDAD, c.Edad);
             operation.AddVarcharParam(DB_COL_ESTADOCIVIL, c.EstadoCivil);
             operation.AddVarcharParam(DB_COL_GENERO, c.Genero);
-            operation.AddIntParam(DB_COL_DIRECCION, c.Direccion);
 
             return operation;
         }
@@ -54,15 +48,7 @@ namespace AccesoDatos.Mapper
             return operation;
         }
 
-        internal SqlOperation GetUpdateStatement(Cliente cliente)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal SqlOperation GetDeleteStatement(Cliente cliente)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public SqlOperation GetRetriveAllStatement()
         {
@@ -83,7 +69,6 @@ namespace AccesoDatos.Mapper
             operation.AddIntParam(DB_COL_EDAD, c.Edad);
             operation.AddVarcharParam(DB_COL_ESTADOCIVIL, c.EstadoCivil);
             operation.AddVarcharParam(DB_COL_GENERO, c.Genero);
-            operation.AddIntParam(DB_COL_DIRECCION, c.Direccion);
 
             return operation;
         }
@@ -121,8 +106,7 @@ namespace AccesoDatos.Mapper
                 FechaNac = GetDateValue(row, DB_COL_FECHANAC),
                 Edad = GetIntValue(row, DB_COL_EDAD),
                 EstadoCivil = GetStringValue(row, DB_COL_ESTADOCIVIL),
-                Genero= GetStringValue(row, DB_COL_GENERO),
-                Direccion = GetIntValue(row, DB_COL_DIRECCION)
+                Genero= GetStringValue(row, DB_COL_GENERO)
             };
 
             return cliente;

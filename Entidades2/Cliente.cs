@@ -14,7 +14,6 @@ namespace Entidades
         public int Edad { get; set; }
         public string EstadoCivil { get; set; }
         public string Genero { get; set; }
-        public int Direccion { get; set; }
 
         public Cliente()
         {
@@ -23,31 +22,29 @@ namespace Entidades
 
         public Cliente(string[] infoArray)
         {
-            if (infoArray != null && infoArray.Length >= 8)
+            if (infoArray != null && infoArray.Length >= 7)
             {
                 var entero = 0;
+                /*
                 if (Int32.TryParse(infoArray[0], out entero))
                     Id_Cliente = entero;
                 else
                     throw new Exception("Id tiene que ser un número");
-                Cedula = infoArray[1];
-                Nombre = infoArray[2];
-                Apellido = infoArray[3];
-                FechaNac = DateTime.Parse(infoArray[4]);
-                if (Int32.TryParse(infoArray[5], out entero))
+                */
+                Cedula = infoArray[0];
+                Nombre = infoArray[1];
+                Apellido = infoArray[2];
+                FechaNac = DateTime.Parse(infoArray[3]);
+                if (Int32.TryParse(infoArray[4], out entero))
                     Edad = entero;
                 else
                     throw new Exception("Edad tiene que ser un número");
-                EstadoCivil = infoArray[6];
-                Genero = infoArray[7];
-                if (Int32.TryParse(infoArray[8], out entero))
-                    Direccion = entero;
-                else
-                    throw new Exception("Direccion tiene que ser un número");
+                EstadoCivil = infoArray[5];
+                Genero = infoArray[6];
             }
             else
             {
-                throw new Exception("Todos los valores requeridos[id,cedula,nombre,apellido.fechaNac,edad,estadoCivil,genero,direccion]");
+                throw new Exception("Todos los valores requeridos[id,cedula,nombre,apellido.fechaNac,edad,estadoCivil,genero]");
             }
 
         }

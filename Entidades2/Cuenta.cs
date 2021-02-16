@@ -19,17 +19,20 @@ namespace Entidades
 
         public Cuenta(string[] infoArray)
         {
-            if (infoArray != null && infoArray.Length >= 8)
+            if (infoArray != null && infoArray.Length >= 4)
             {
+                
                 var entero = 0;
+                /*
                 if (Int32.TryParse(infoArray[0], out entero))
                     Id_Cuenta = entero;
                 else
                     throw new Exception("Id tiene que ser un número");
-                Nombre = infoArray[1];
-                Moneda = infoArray[2];
-                Saldo = float.Parse(infoArray[3]);
-                if (Int32.TryParse(infoArray[4], out entero))
+                */
+                Nombre = infoArray[0];
+                Moneda = infoArray[1];
+                Saldo = float.Parse(infoArray[2]);
+                if (Int32.TryParse(infoArray[3], out entero))
                     Cliente = entero;
                 else
                     throw new Exception("Cliente tiene que ser un número");

@@ -12,23 +12,19 @@ namespace AccesoDatos.Mapper
         private const string DB_COL_PROVINCIA = "Provincia";
         private const string DB_COL_CANTON = "Canton";
         private const string DB_COL_DISTRITO = "Distrito";
-
+        private const string DB_COL_CLIENTE = "Cliente";
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "CRE_DIRECCION_PR" };
 
             var c = (Direccion)entity;
-            operation.AddIntParam(DB_COL_ID, c.Id_Direccion);
+            //operation.AddIntParam(DB_COL_ID, c.Id_Direccion);
             operation.AddVarcharParam(DB_COL_PROVINCIA, c.Provincia);
             operation.AddVarcharParam(DB_COL_CANTON, c.Canton);
             operation.AddVarcharParam(DB_COL_DISTRITO, c.Distrito);
+            operation.AddIntParam(DB_COL_CLIENTE, c.Cliente);
 
             return operation;
-        }
-
-        internal object GetCreateStatement(Direccion direccion)
-        {
-            throw new NotImplementedException();
         }
 
         //DEVUELVE EL PROCEDURE DE IDENTITY ID
@@ -108,6 +104,7 @@ namespace AccesoDatos.Mapper
                 Provincia = GetStringValue(row, DB_COL_PROVINCIA),
                 Canton= GetStringValue(row, DB_COL_CANTON),
                 Distrito = GetStringValue(row, DB_COL_DISTRITO),
+                Cliente = GetIntValue(row,DB_COL_CLIENTE)
                 
             };
 

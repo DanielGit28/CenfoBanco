@@ -1,8 +1,9 @@
 ﻿Imports Entidades
+Imports Management
 Module Program
 
     Sub Main()
-
+        Run()
     End Sub
 
     Public Function Run()
@@ -45,7 +46,17 @@ Module Program
             Console.WriteLine("ERROR: " + ex.Message)
             Console.WriteLine(ex.StackTrace)
             Console.WriteLine("***************************")
+        Finally
+            Console.WriteLine("Continue? Y/N")
+            Dim moreActions = Console.ReadLine()
+
+            If moreActions.Equals("Y", StringComparison.CurrentCultureIgnoreCase) Then
+                Run()
+            End If
+
         End Try
+
+
 
 
 
@@ -70,7 +81,7 @@ Module Program
             Case 2
                 ObtenerClientes(mngCliente)
             Case 3
-                ObtenerClienteXId(mngCliente)
+                ObtenerClienteXId(mngCliente, cliente)
             Case 4
                 ActualizarCliente(mngCliente)
             Case 5
@@ -84,19 +95,10 @@ Module Program
     End Function
 
     Public Function CrearCliente(mng As DireccionManagement, mngCliente As ClienteManagement, direccion As Direccion, cliente As Cliente)
-        Console.WriteLine("--------Crear cliente--------")
-        Console.WriteLine("Digite la provincia, canton y distrito separados por coma")
-        Dim infoDireccion = Console.ReadLine()
-        Dim arrayDireccion = infoDireccion.Split(",")
-        direccion = New Entidades.Direccion(arrayDireccion)
-        mng.Create(direccion)
-
-        Dim idDireccion As Integer = mng.RetrieveIdentity()
-
         Console.WriteLine("Digite la cedula, nombre, apellido, fechaNac(YYYY-MM-DD), edad, estado civil y genero separados por coma y sin espacios")
         Dim infoCliente = Console.ReadLine()
+        'Console.ReadLine()
         Dim arrayCliente = infoCliente.Split(",")
-        arrayCliente.Append("," + idDireccion)
         cliente = New Entidades.Cliente(arrayCliente)
         mngCliente.Create(cliente)
 
@@ -111,19 +113,22 @@ Module Program
         Dim c As Cliente
 
         For Each c In clientes
-            count += 1
-            Console.WriteLine(count + " - " + c.GetEntityInformation())
+            If (c IsNot Nothing) Then
+                count += 1
+                Console.WriteLine(count + " - " + c.GetEntityInformation())
+            Else
+                Console.WriteLine("No hay clientes registrados")
+            End If
         Next
 
     End Function
 
-    Public Function ObtenerClienteXId(mng As ClienteManagement)
+    Public Function ObtenerClienteXId(mng As ClienteManagement, cliente As Cliente)
         Console.WriteLine("--------Obtener cliente por id--------")
         Console.WriteLine("Digite el id del cliente: ")
-        Dim id = Console.ReadLine()
-        Dim cliente As Cliente
-        cliente.Id_Cliente = id
+        cliente.Id_Cliente = Console.ReadLine()
         cliente = mng.RetrieveById(cliente)
+
         If cliente IsNot Nothing Then
             Console.WriteLine(cliente.GetEntityInformation())
         Else
@@ -265,8 +270,12 @@ Module Program
         Dim c As Credito
 
         For Each c In creditos
-            count += 1
-            Console.WriteLine(count + " - " + c.GetEntityInformation())
+            If (c IsNot Nothing) Then
+                count += 1
+                Console.WriteLine(count + " - " + c.GetEntityInformation())
+            Else
+                Console.WriteLine("No hay creditos registrados")
+            End If
         Next
 
     End Function
@@ -408,8 +417,12 @@ Module Program
         Dim c As Cuenta
 
         For Each c In cuentas
-            count += 1
-            Console.WriteLine(count + " - " + c.GetEntityInformation())
+            If (c IsNot Nothing) Then
+                count += 1
+                Console.WriteLine(count + " - " + c.GetEntityInformation())
+            Else
+                Console.WriteLine("No hay cuentas registrados")
+            End If
         Next
 
     End Function
@@ -488,25 +501,28 @@ Module Program
     '---FUNCIONES DIRECCION---
     Public Function MenuDireccion(mng As DireccionManagement)
         Console.WriteLine("Menu de direcciones")
-        Console.WriteLine("1. Obtener todos las direcciones")
-        Console.WriteLine("2. Obtener direccion por id")
-        Console.WriteLine("3. Actualizar direccion")
-        Console.WriteLine("4. Eliminar direccion")
-        Console.WriteLine("5. Salir")
+        Console.WriteLine("1. Crear direccion")
+        Console.WriteLine("2. Obtener todos las direcciones")
+        Console.WriteLine("3. Obtener direccion por id")
+        Console.WriteLine("4. Actualizar direccion")
+        Console.WriteLine("5. Eliminar direccion")
+        Console.WriteLine("6. Salir")
 
         Console.WriteLine("Seleccione una opcion: ")
         Dim opcion As String = Console.ReadLine()
 
         Select Case opcion
             Case 1
-                ObtenerDirecciones(mng)
+                CrearDireccion(mng)
             Case 2
-                ObtenerDireccionXId(mng)
+                ObtenerDirecciones(mng)
             Case 3
-                ActualizarDireccion(mng)
+                ObtenerDireccionXId(mng)
             Case 4
-                EliminarDireccion(mng)
+                ActualizarDireccion(mng)
             Case 5
+                EliminarDireccion(mng)
+            Case 6
                 Exit Select
             Case Else
                 Debug.WriteLine("No selecciono una opcion valida")
@@ -514,6 +530,17 @@ Module Program
 
     End Function
 
+    Public Function CrearDireccion(mng As DireccionManagement)
+        Console.WriteLine("--------Crear direccion--------")
+        Console.WriteLine("Digite la provincia, canton,distrito y id de cliente separados por coma")
+        Dim infoDireccion = Console.ReadLine()
+        'Console.ReadLine()
+        Dim arrayDireccion = infoDireccion.Split(",")
+        Dim Direccion = New Entidades.Direccion(arrayDireccion)
+        mng.Create(Direccion)
+
+        Console.WriteLine("Direccion creada")
+    End Function
 
     Public Function ObtenerDirecciones(mng As DireccionManagement)
         Console.WriteLine("--------Obtener direcciones--------")
@@ -522,8 +549,12 @@ Module Program
         Dim d As Direccion
 
         For Each d In direcciones
-            count += 1
-            Console.WriteLine(count + " - " + d.GetEntityInformation())
+            If (d IsNot Nothing) Then
+                count += 1
+                Console.WriteLine(count + " - " + d.GetEntityInformation())
+            Else
+                Console.WriteLine("No hay direcciones registrados")
+            End If
         Next
 
     End Function

@@ -19,7 +19,7 @@ namespace AccesoDatos.Mapper
             var operation = new SqlOperation { ProcedureName = "CRE_CUENTA_PR" };
 
             var c = (Cuenta)entity;
-            operation.AddIntParam(DB_COL_ID, c.Id_Cuenta);
+            //operation.AddIntParam(DB_COL_ID, c.Id_Cuenta);
             operation.AddVarcharParam(DB_COL_NOMBRE, c.Nombre);
             operation.AddVarcharParam(DB_COL_MONEDA, c.Moneda);
             operation.AddDoubleParam(DB_COL_SALDO, c.Saldo);
@@ -28,11 +28,7 @@ namespace AccesoDatos.Mapper
             return operation;
         }
 
-        internal object GetCreateStatement(Cuenta cuenta)
-        {
-            throw new NotImplementedException();
-        }
-
+      
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "RET_CUENTA_PR" };
@@ -63,15 +59,7 @@ namespace AccesoDatos.Mapper
             return operation;
         }
 
-        internal SqlOperation GetDeleteStatement(Cliente cuenta)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal SqlOperation GetUpdateStatement(Cuenta cuenta)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {

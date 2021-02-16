@@ -36,14 +36,29 @@ namespace AccesoDatos.DAO
                 CommandType = CommandType.StoredProcedure
             })
             {
+                //Limpiar los parametros
+                command.Parameters.Clear();
+
                 foreach (var param in sqlOperation.Parameters)
                 {
                     command.Parameters.Add(param);
                 }
+                if(command.Parameters != null)
+                {
+                    foreach (var param in sqlOperation.Parameters)
+                    {
+                        Console.WriteLine("Parametros: " + command.Parameters.ToString());
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Vacío");
+                }
+                
 
                 conn.Open();
                 command.ExecuteNonQuery();
-
+                conn.Close();
             }
         }
 
@@ -53,8 +68,12 @@ namespace AccesoDatos.DAO
             using (var command = new SqlCommand(sqlOperation.ProcedureName, conn)
             {
                 CommandType = CommandType.StoredProcedure
+
             })
             {
+                //Limpiar los parametros
+                command.Parameters.Clear();
+
                 foreach (var param in sqlOperation.Parameters)
                 {
                     command.Parameters.Add(param);
@@ -63,7 +82,10 @@ namespace AccesoDatos.DAO
                 conn.Open();
                 command.ExecuteNonQuery();
 
+                conn.Close();   
+                
             }
+            
         }
 
         public List<Dictionary<string, object>> ExecuteQueryProcedure(SqlOperation sqlOperation)
@@ -77,6 +99,9 @@ namespace AccesoDatos.DAO
                 CommandType = CommandType.StoredProcedure
             })
             {
+                //Limpiar los parametros
+                command.Parameters.Clear();
+
                 foreach (var param in sqlOperation.Parameters)
                 {
                     command.Parameters.Add(param);
@@ -96,8 +121,11 @@ namespace AccesoDatos.DAO
                         lstResult.Add(dict);
                     }
                 }
+                conn.Close();
+
             }
 
+            
             return lstResult;
         }
     }

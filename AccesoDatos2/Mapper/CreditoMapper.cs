@@ -15,10 +15,7 @@ namespace AccesoDatos.Mapper
         private const string DB_COL_CUOTA = "Cuota";
         private const string DB_COL_FECHAINICIO = "FechaInicio";
 
-        internal object GetCreateStatement(Credito credito)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         private const string DB_COL_ESTADO = "Estado";
         private const string DB_COL_SALDOOPERACION = "SaldoOperacion";
@@ -29,7 +26,7 @@ namespace AccesoDatos.Mapper
             var operation = new SqlOperation { ProcedureName = "CRE_CREDITO_PR" };
 
             var c = (Credito)entity;
-            operation.AddIntParam(DB_COL_ID, c.Id_Credito);
+            //operation.AddIntParam(DB_COL_ID, c.Id_Credito);
             operation.AddDoubleParam(DB_COL_MONTO, c.Monto);
             operation.AddDoubleParam(DB_COL_TASA, c.Tasa);
             operation.AddVarcharParam(DB_COL_NOMBRE, c.Nombre);
@@ -53,15 +50,7 @@ namespace AccesoDatos.Mapper
             return operation;
         }
 
-        internal SqlOperation GetUpdateStatement(Credito credito)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal SqlOperation GetDeleteStatement(Credito credito)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public SqlOperation GetRetriveAllStatement()
         {

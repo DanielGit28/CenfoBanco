@@ -26,18 +26,20 @@ namespace Entidades
             if (infoArray != null && infoArray.Length >= 8)
             {
                 var entero = 0;
+                /*
                 if (Int32.TryParse(infoArray[0], out entero))
                     Id_Credito = entero;
                 else
                     throw new Exception("Id tiene que ser un número");
-                Monto = float.Parse(infoArray[1]);
-                Tasa = float.Parse(infoArray[2]);
-                Nombre = infoArray[3];
-                Cuota = float.Parse(infoArray[4]);
-                FechaInicio = DateTime.Parse(infoArray[5]);
-                Estado = infoArray[6];
-                SaldoOperacion = float.Parse(infoArray[7]);
-                if (Int32.TryParse(infoArray[8], out entero))
+                */
+                Monto = float.Parse(infoArray[0]);
+                Tasa = float.Parse(infoArray[1]);
+                Nombre = infoArray[2];
+                Cuota = float.Parse(infoArray[3]);
+                FechaInicio = DateTime.Parse(infoArray[4]);
+                Estado = infoArray[5];
+                SaldoOperacion = float.Parse(infoArray[6]);
+                if (Int32.TryParse(infoArray[7], out entero))
                     Cliente = entero;
                 else
                     throw new Exception("Cliente tiene que ser un número");

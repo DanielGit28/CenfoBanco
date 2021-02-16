@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "Entidades2\Ent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccesoDatos", "AccesoDatos2\AccesoDatos.csproj", "{A8A7E783-3AFA-4CE0-BEB6-10EECCB71705}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Management", "Management\Management.csproj", "{F19CEF67-F5E4-4989-BECC-B436035FCDFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{A8A7E783-3AFA-4CE0-BEB6-10EECCB71705}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8A7E783-3AFA-4CE0-BEB6-10EECCB71705}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8A7E783-3AFA-4CE0-BEB6-10EECCB71705}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F19CEF67-F5E4-4989-BECC-B436035FCDFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F19CEF67-F5E4-4989-BECC-B436035FCDFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F19CEF67-F5E4-4989-BECC-B436035FCDFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F19CEF67-F5E4-4989-BECC-B436035FCDFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
