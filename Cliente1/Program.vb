@@ -31,11 +31,11 @@ Module Program
                 Case 1
                     MenuCliente(direccion_mng, cliente_mng, direccion, cliente)
                 Case 2
-                    MenuCredito(cliente_mng, credito_mng, credito)
+                    MenuCredito(cliente_mng, credito_mng, credito, cliente)
                 Case 3
-                    MenuCuenta(cliente_mng, cuenta_mng, cuenta)
+                    MenuCuenta(cliente_mng, cuenta_mng, cuenta, cliente)
                 Case 4
-                    MenuDireccion(direccion_mng)
+                    MenuDireccion(direccion_mng, direccion)
                 Case 5
                     Exit Select
                 Case Else
@@ -83,9 +83,9 @@ Module Program
             Case 3
                 ObtenerClienteXId(mngCliente, cliente)
             Case 4
-                ActualizarCliente(mngCliente)
+                ActualizarCliente(mngCliente, cliente)
             Case 5
-                EliminarCliente(mngCliente)
+                EliminarCliente(mngCliente, cliente)
             Case 6
                 Exit Select
             Case Else
@@ -115,9 +115,9 @@ Module Program
         For Each c In clientes
             If (c IsNot Nothing) Then
                 count += 1
-                Console.WriteLine(count + " - " + c.GetEntityInformation())
+                Console.WriteLine(count & " - " + c.GetEntityInformation())
             Else
-                Console.WriteLine("No hay clientes registrados")
+                Console.WriteLine("No hay clienstes registrados")
             End If
         Next
 
@@ -137,12 +137,11 @@ Module Program
 
     End Function
 
-    Public Function ReturnClienteXId(mng As ClienteManagement) As Cliente
+    Public Function ReturnClienteXId(mng As ClienteManagement, cliente As Cliente) As Cliente
         Console.WriteLine("--------Obtener cliente por id--------")
         Console.WriteLine("Digite el id del cliente: ")
-        Dim id = Console.ReadLine()
-        Dim cliente As Cliente
-        cliente.Id_Cliente = id
+        cliente.Id_Cliente = Console.ReadLine()
+
         cliente = mng.RetrieveById(cliente)
         If cliente IsNot Nothing Then
             Return cliente
@@ -152,14 +151,13 @@ Module Program
 
     End Function
 
-    Public Function ActualizarCliente(mng As ClienteManagement)
+    Public Function ActualizarCliente(mng As ClienteManagement, cliente As Cliente)
         Console.WriteLine("------Actualizar cliente------")
         Console.WriteLine("Puede actualizar todos los datos o solo los que desee. Si no desea cambiar un dato, digite el dato registrado")
         Console.WriteLine("Digite el id del cliente: ")
-        Dim id = Console.ReadLine()
-        Dim cliente As Cliente
-        cliente.Id_Cliente = id
+        cliente.Id_Cliente = Console.ReadLine()
         cliente = mng.RetrieveById(cliente)
+
         If cliente IsNot Nothing Then
             Console.WriteLine(cliente.GetEntityInformation())
             Console.WriteLine("Digite una nueva cédula, la cedula actual es " + cliente.Cedula)
@@ -171,7 +169,7 @@ Module Program
             Console.WriteLine("Digite una nueva fecha de nacimiento (YYYY-MM-DD), la fecha actual es " + cliente.FechaNac)
             Dim fechaNac = Console.ReadLine()
             cliente.FechaNac = Convert.ToDateTime(fechaNac)
-            Console.WriteLine("Digite una edad nueva, la edad actual es " + cliente.Edad)
+            Console.WriteLine("Digite una edad nueva, la edad actual es " + cliente.Edad.ToString())
             Dim edad = Console.ReadLine()
             cliente.Edad = Convert.ToInt32(edad)
             Console.WriteLine("Digite un nuevo estado civil, el actual es " + cliente.EstadoCivil)
@@ -188,12 +186,11 @@ Module Program
 
     End Function
 
-    Public Function EliminarCliente(mng As ClienteManagement)
+    Public Function EliminarCliente(mng As ClienteManagement, cliente As Cliente)
         Console.WriteLine("--------Eliminar cliente--------")
         Console.WriteLine("Digite el id del cliente: ")
-        Dim id = Console.ReadLine()
-        Dim cliente As Cliente
-        cliente.Id_Cliente = id
+        cliente.Id_Cliente = Console.ReadLine()
+
         cliente = mng.RetrieveById(cliente)
 
         If cliente IsNot Nothing Then
@@ -216,7 +213,7 @@ Module Program
     '---FIN FUNCIONES CLIENTE---
 
     '---FUNCIONES CREDITO---
-    Public Function MenuCredito(mngCliente As ClienteManagement, mng As CreditoManagement, credito As Credito)
+    Public Function MenuCredito(mngCliente As ClienteManagement, mng As CreditoManagement, credito As Credito, cliente As Cliente)
         Console.WriteLine("Menu de creditos")
         Console.WriteLine("1. Crear credito")
         Console.WriteLine("2. Obtener todos los creditos")
@@ -230,15 +227,15 @@ Module Program
 
         Select Case opcion
             Case 1
-                CrearCredito(mng, mngCliente, credito)
+                CrearCredito(mng, mngCliente, credito, cliente)
             Case 2
                 ObtenerCreditos(mng)
             Case 3
-                ObtenerCreditoXId(mng)
+                ObtenerCreditoXId(mng, credito)
             Case 4
-                ActualizarCredito(mng)
+                ActualizarCredito(mng, credito)
             Case 5
-                EliminarCredito(mng)
+                EliminarCredito(mng, credito)
             Case 6
                 Exit Select
             Case Else
@@ -247,15 +244,17 @@ Module Program
 
     End Function
 
-    Public Function CrearCredito(mng As CreditoManagement, mngCliente As ClienteManagement, credito As Credito)
+    Public Function CrearCredito(mng As CreditoManagement, mngCliente As ClienteManagement, credito As Credito, c As Cliente)
         Console.WriteLine("--------Crear credito--------")
-        Dim cliente = ReturnClienteXId(mngCliente)
+        'Dim cliente = ReturnClienteXId(mngCliente, c)
 
 
-        Console.WriteLine("Digite el monto, tasa, nombre, cuota, fecha inicio(YYYY-MM-DD), estado y saldo de operacion separados por coma y sin espacio")
+        Console.WriteLine("Digite el monto, tasa, nombre, cuota, fecha inicio(YYYY-MM-DD), estado,saldo de operacion y id del cliente separados por coma y sin espacio")
         Dim infoCredito = Console.ReadLine()
-        Dim arrayCredito = infoCredito.Split(",")
-        arrayCredito.Append("," + cliente.Id_Cliente)
+        Dim arrayCredito
+
+        arrayCredito = infoCredito.Split(",")
+
         credito = New Entidades.Credito(arrayCredito)
         mng.Create(credito)
 
@@ -272,7 +271,7 @@ Module Program
         For Each c In creditos
             If (c IsNot Nothing) Then
                 count += 1
-                Console.WriteLine(count + " - " + c.GetEntityInformation())
+                Console.WriteLine(count & " - " + c.GetEntityInformation())
             Else
                 Console.WriteLine("No hay creditos registrados")
             End If
@@ -280,12 +279,10 @@ Module Program
 
     End Function
 
-    Public Function ObtenerCreditoXId(mng As CreditoManagement)
+    Public Function ObtenerCreditoXId(mng As CreditoManagement, credito As Credito)
         Console.WriteLine("--------Obtener credito por id--------")
         Console.WriteLine("Digite el id del credito: ")
-        Dim id = Console.ReadLine()
-        Dim credito As Credito
-        credito.Id_Credito = id
+        credito.Id_Credito = Console.ReadLine()
         credito = mng.RetrieveById(credito)
 
         If credito IsNot Nothing Then
@@ -296,26 +293,25 @@ Module Program
 
     End Function
 
-    Public Function ActualizarCredito(mng As CreditoManagement)
+    Public Function ActualizarCredito(mng As CreditoManagement, credito As Credito)
         Console.WriteLine("------Actualizar credito------")
         Console.WriteLine("Puede actualizar todos los datos o solo los que desee. Si no desea cambiar un dato, digite el dato registrado")
         Console.WriteLine("Digite el id del credito: ")
-        Dim id = Console.ReadLine()
-        Dim credito As Credito
-        credito.Id_Credito = id
+        credito.Id_Credito = Console.ReadLine()
+
         credito = mng.RetrieveById(credito)
 
         If credito IsNot Nothing Then
             Console.WriteLine(credito.GetEntityInformation())
-            Console.WriteLine("Digite un nuevo monto, el monto actual es " + credito.Monto)
+            Console.WriteLine("Digite un nuevo monto, el monto actual es " + credito.Monto.ToString())
             Dim monto = Console.ReadLine()
             credito.Monto = Convert.ToDouble(monto)
-            Console.WriteLine("Digite una nueva tasa, la tasa actual es " + credito.Tasa)
+            Console.WriteLine("Digite una nueva tasa, la tasa actual es " + credito.Tasa.ToString())
             Dim tasa = Console.ReadLine()
             credito.Tasa = Convert.ToDouble(tasa)
             Console.WriteLine("Digite un nuevo nombre, el actual es " + credito.Nombre)
             credito.Nombre = Console.ReadLine()
-            Console.WriteLine("Digite una nueva cuota, la cuota actual es " + credito.Cuota)
+            Console.WriteLine("Digite una nueva cuota, la cuota actual es " + credito.Cuota.ToString())
             Dim cuota = Console.ReadLine()
             credito.Cuota = Convert.ToDouble(cuota)
             Console.WriteLine("Digite una nueva fecha de inicio (YYYY-MM-DD), la fecha actual es " + credito.FechaInicio)
@@ -323,7 +319,7 @@ Module Program
             credito.FechaInicio = Convert.ToDateTime(fechaInicio)
             Console.WriteLine("Digite un nuevo estado, el actual es " + credito.Estado)
             credito.Estado = Console.ReadLine()
-            Console.WriteLine("Digite un nuevo saldo de operacion, el saldo actual es " + credito.SaldoOperacion)
+            Console.WriteLine("Digite un nuevo saldo de operacion, el saldo actual es " + credito.SaldoOperacion.ToString())
             Dim saldoOp = Console.ReadLine()
             credito.SaldoOperacion = Convert.ToDouble(saldoOp)
 
@@ -336,12 +332,11 @@ Module Program
 
     End Function
 
-    Public Function EliminarCredito(mng As CreditoManagement)
+    Public Function EliminarCredito(mng As CreditoManagement, credito As Credito)
         Console.WriteLine("--------Eliminar credito--------")
         Console.WriteLine("Digite el id del credito: ")
-        Dim id = Console.ReadLine()
-        Dim credito As Credito
-        credito.Id_Credito = id
+        credito.Id_Credito = Console.ReadLine()
+
         credito = mng.RetrieveById(credito)
 
         If credito IsNot Nothing Then
@@ -363,7 +358,7 @@ Module Program
     '---FIN FUNCIONES CREDITO---
 
     '---FUNCIONES CUENTA---
-    Public Function MenuCuenta(mngCliente As ClienteManagement, mng As CuentaManagement, cuenta As Cuenta)
+    Public Function MenuCuenta(mngCliente As ClienteManagement, mng As CuentaManagement, cuenta As Cuenta, cliente As Cliente)
         Console.WriteLine("Menu de cuentas")
         Console.WriteLine("1. Crear cuenta")
         Console.WriteLine("2. Obtener todos los cuentas")
@@ -377,15 +372,15 @@ Module Program
 
         Select Case opcion
             Case 1
-                CrearCuenta(mng, mngCliente, cuenta)
+                CrearCuenta(mng, mngCliente, cuenta, cliente)
             Case 2
                 ObtenerCuentas(mng)
             Case 3
-                ObtenerCuentaXId(mng)
+                ObtenerCuentaXId(mng, cuenta)
             Case 4
-                ActualizarCuenta(mng)
+                ActualizarCuenta(mng, cuenta)
             Case 5
-                EliminarCuenta(mng)
+                EliminarCuenta(mng, cuenta)
             Case 6
                 Exit Select
             Case Else
@@ -394,15 +389,17 @@ Module Program
 
     End Function
 
-    Public Function CrearCuenta(mng As CuentaManagement, mngCliente As ClienteManagement, cuenta As Cuenta)
+    Public Function CrearCuenta(mng As CuentaManagement, mngCliente As ClienteManagement, cuenta As Cuenta, c As Cliente)
         Console.WriteLine("--------Crear cuenta-------")
-        Dim cliente = ReturnClienteXId(mngCliente)
+        'Dim cliente = ReturnClienteXId(mngCliente, c)
 
 
-        Console.WriteLine("Digite el nombre, moneda y saldo de la cuenta separados por coma y sin espacio")
+        Console.WriteLine("Digite el nombre, moneda, saldo y el id del cliente de la cuenta separados por coma y sin espacio")
         Dim infoCuenta = Console.ReadLine()
-        Dim arrayCuenta = infoCuenta.Split(",")
-        arrayCuenta.Append("," + cliente.Id_Cliente)
+        Dim arrayCuenta
+        'arrayCuenta.Append("," & cliente.Id_Cliente)
+        arrayCuenta = infoCuenta.Split(",")
+
         cuenta = New Entidades.Cuenta(arrayCuenta)
         mng.Create(cuenta)
 
@@ -419,7 +416,7 @@ Module Program
         For Each c In cuentas
             If (c IsNot Nothing) Then
                 count += 1
-                Console.WriteLine(count + " - " + c.GetEntityInformation())
+                Console.WriteLine(count & " - " + c.GetEntityInformation())
             Else
                 Console.WriteLine("No hay cuentas registrados")
             End If
@@ -427,12 +424,11 @@ Module Program
 
     End Function
 
-    Public Function ObtenerCuentaXId(mng As CuentaManagement)
+    Public Function ObtenerCuentaXId(mng As CuentaManagement, cuenta As Cuenta)
         Console.WriteLine("--------Obtener cuenta por id--------")
         Console.WriteLine("Digite el id de la cuenta: ")
-        Dim id = Console.ReadLine()
-        Dim cuenta As Cuenta
-        cuenta.Id_Cuenta = id
+        cuenta.Id_Cuenta = Console.ReadLine()
+
         cuenta = mng.RetrieveById(cuenta)
 
         If cuenta IsNot Nothing Then
@@ -443,13 +439,12 @@ Module Program
 
     End Function
 
-    Public Function ActualizarCuenta(mng As CuentaManagement)
+    Public Function ActualizarCuenta(mng As CuentaManagement, cuenta As Cuenta)
         Console.WriteLine("------Actualizar cuenta------")
         Console.WriteLine("Puede actualizar todos los datos o solo los que desee. Si no desea cambiar un dato, digite el dato registrado")
         Console.WriteLine("Digite el id de la cuenta: ")
-        Dim id = Console.ReadLine()
-        Dim cuenta As Cuenta
-        cuenta.Id_Cuenta = id
+        cuenta.Id_Cuenta = Console.ReadLine()
+
         cuenta = mng.RetrieveById(cuenta)
 
         If cuenta IsNot Nothing Then
@@ -458,7 +453,7 @@ Module Program
             cuenta.Nombre = Console.ReadLine()
             Console.WriteLine("Digite una nueva moneda, la moneda actual es " + cuenta.Moneda)
             cuenta.Moneda = Console.ReadLine()
-            Console.WriteLine("Digite un nuevo saldo, el saldo actual es " + cuenta.Saldo)
+            Console.WriteLine("Digite un nuevo saldo, el saldo actual es " + cuenta.Saldo.ToString())
             Dim saldo = Console.ReadLine()
             cuenta.Saldo = Convert.ToDouble(saldo)
 
@@ -471,12 +466,11 @@ Module Program
 
     End Function
 
-    Public Function EliminarCuenta(mng As CuentaManagement)
+    Public Function EliminarCuenta(mng As CuentaManagement, cuenta As Cuenta)
         Console.WriteLine("--------Eliminar cuenta--------")
         Console.WriteLine("Digite el id de la cuenta: ")
-        Dim id = Console.ReadLine()
-        Dim cuenta As Cuenta
-        cuenta.Id_Cuenta = id
+        cuenta.Id_Cuenta = Console.ReadLine()
+
         cuenta = mng.RetrieveById(cuenta)
 
         If cuenta IsNot Nothing Then
@@ -499,7 +493,7 @@ Module Program
     '---FIN FUNCIONES CUENTA
 
     '---FUNCIONES DIRECCION---
-    Public Function MenuDireccion(mng As DireccionManagement)
+    Public Function MenuDireccion(mng As DireccionManagement, direccion As Direccion)
         Console.WriteLine("Menu de direcciones")
         Console.WriteLine("1. Crear direccion")
         Console.WriteLine("2. Obtener todos las direcciones")
@@ -517,11 +511,11 @@ Module Program
             Case 2
                 ObtenerDirecciones(mng)
             Case 3
-                ObtenerDireccionXId(mng)
+                ObtenerDireccionXId(mng, direccion)
             Case 4
-                ActualizarDireccion(mng)
+                ActualizarDireccion(mng, direccion)
             Case 5
-                EliminarDireccion(mng)
+                EliminarDireccion(mng, direccion)
             Case 6
                 Exit Select
             Case Else
@@ -551,7 +545,7 @@ Module Program
         For Each d In direcciones
             If (d IsNot Nothing) Then
                 count += 1
-                Console.WriteLine(count + " - " + d.GetEntityInformation())
+                Console.WriteLine(count & " - " + d.GetEntityInformation())
             Else
                 Console.WriteLine("No hay direcciones registrados")
             End If
@@ -559,12 +553,11 @@ Module Program
 
     End Function
 
-    Public Function ObtenerDireccionXId(mng As DireccionManagement)
+    Public Function ObtenerDireccionXId(mng As DireccionManagement, direccion As Direccion)
         Console.WriteLine("--------Obtener direccion por id--------")
         Console.WriteLine("Digite el id de la direccion: ")
-        Dim id = Console.ReadLine()
-        Dim direccion As Direccion
-        direccion.Id_Direccion = id
+        direccion.Id_Direccion = Console.ReadLine()
+
         direccion = mng.RetrieveById(direccion)
 
         If direccion IsNot Nothing Then
@@ -575,23 +568,25 @@ Module Program
 
     End Function
 
-    Public Function ActualizarDireccion(mng As DireccionManagement)
+    Public Function ActualizarDireccion(mng As DireccionManagement, direccion As Direccion)
         Console.WriteLine("------Actualizar direccion------")
         Console.WriteLine("Puede actualizar todos los datos o solo los que desee. Si no desea cambiar un dato, digite el dato registrado")
         Console.WriteLine("Digite el id de la direccion: ")
-        Dim id = Console.ReadLine()
-        Dim direccion As Direccion
-        direccion.Id_Direccion = id
+        direccion.Id_Direccion = Console.ReadLine()
+
         direccion = mng.RetrieveById(direccion)
 
         If direccion IsNot Nothing Then
             Console.WriteLine(direccion.GetEntityInformation())
             Console.WriteLine("Digite una nueva provincia, la provincia actual es " + direccion.Provincia)
             Dim provincia = Console.ReadLine()
+            direccion.Provincia = provincia
             Console.WriteLine("Digite un nuevo canton, el actual es " + direccion.Canton)
             Dim canton = Console.ReadLine()
+            direccion.Canton = canton
             Console.WriteLine("Digite un nuevo distrito, el actual es " + direccion.Distrito)
             Dim distrito = Console.ReadLine()
+            direccion.Distrito = distrito
 
             mng.Update(direccion)
             Console.WriteLine("Direccion actualizada")
@@ -602,12 +597,11 @@ Module Program
 
     End Function
 
-    Public Function EliminarDireccion(mng As DireccionManagement)
+    Public Function EliminarDireccion(mng As DireccionManagement, direccion As Direccion)
         Console.WriteLine("--------Eliminar direccion--------")
         Console.WriteLine("Digite el id de la direccion: ")
-        Dim id = Console.ReadLine()
-        Dim direccion As Direccion
-        direccion.Id_Direccion = id
+        direccion.Id_Direccion = Console.ReadLine()
+
         direccion = mng.RetrieveById(direccion)
 
         If direccion IsNot Nothing Then

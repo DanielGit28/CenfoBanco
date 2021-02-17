@@ -64,16 +64,6 @@ namespace AccesoDatos.Mapper
             return operation;
         }
 
-        internal SqlOperation GetDeleteStatement(Direccion direccion)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal SqlOperation GetUpdateStatement(Direccion direccion)
-        {
-            throw new NotImplementedException();
-        }
-
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "DEL_DIRECCION_PR" };
